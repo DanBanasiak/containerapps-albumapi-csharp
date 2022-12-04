@@ -17,11 +17,11 @@ builder.Services.AddCors(options => {
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// if (app.Environment.IsDevelopment())
+// {
+    
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors();
 
@@ -29,6 +29,10 @@ app.MapGet("/", async context =>
 {
     await context.Response.WriteAsync("Hit the /albums endpoint to retrieve a list of albums!");
 });
+
+
+app.MapGet("time", () => Results.Ok(DateTime.UtcNow));
+app.MapGet("hi", () => Results.Ok($"hello world!"));
 
 app.MapGet("/albums", () =>
 {
